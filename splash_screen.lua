@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------
 --
 -- splash_screen.lua
--- Created by: Your Name
+-- Created by: Maria Temu
 -- Date: Month Day, Year
 -- Description: This is the splash screen of the game. It displays the 
 -- company logo that...
@@ -23,20 +23,20 @@ local scene = composer.newScene( sceneName )
 -----------------------------------------------------------------------------------------
  
 -- The local variables for this scene
-local beetleship
+local Turtle
 local scrollXSpeed = 8
 local scrollYSpeed = -3
-local jungleSounds = audio.loadSound("Sounds/animals144.mp3")
-local jungleSoundsChannel
+local whooshSounds = audio.loadSound("Sounds/whoosh.mp3")
+local whooshSoundsChannel
 
 --------------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 --------------------------------------------------------------------------------------------
 
--- The function that moves the beetleship across the screen
-local function moveBeetleship()
-    beetleship.x = beetleship.x + scrollXSpeed
-    beetleship.y = beetleship.y + scrollYSpeed
+-- The function that moves the Turtle across the screen
+local function moveTurtle()
+    Turtle.x = Turtle.x + scrollXSpeed
+    Turtle.y = Turtle.y + scrollYSpeed
 end
 
 -- The function that will go to the main menu 
@@ -57,15 +57,15 @@ function scene:create( event )
     -- set the background to be black
     display.setDefault("background", 0, 0, 0)
 
-    -- Insert the beetleship image
-    beetleship = display.newImageRect("Images/beetleship.png", 200, 200)
+    -- Insert the Turtle image
+    Turtle = display.newImageRect("Images/Turtle.png", 200, 200)
 
-    -- set the initial x and y position of the beetleship
-    beetleship.x = 100
-    beetleship.y = display.contentHeight/2
+    -- set the initial x and y position of the Turtle
+    Turtle.x = 100
+    Turtle.y = display.contentHeight/2
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( beetleship )
+    sceneGroup:insert( Turtle )
 
 end -- function scene:create( event )
 
@@ -90,10 +90,10 @@ function scene:show( event )
 
     elseif ( phase == "did" ) then
         -- start the splash screen music
-        jungleSoundsChannel = audio.play(jungleSounds )
+        whooshSoundsChannel = audio.play(whooshSounds )
 
-        -- Call the moveBeetleship function as soon as we enter the frame.
-        Runtime:addEventListener("enterFrame", moveBeetleship)
+        -- Call the moveTurtle function as soon as we enter the frame.
+        Runtime:addEventListener("enterFrame", moveTurtle)
 
         -- Go to the main menu screen after the given time.
         timer.performWithDelay ( 3000, gotoMainMenu)          
@@ -123,8 +123,8 @@ function scene:hide( event )
     -- Called immediately after scene goes off screen.
     elseif ( phase == "did" ) then
         
-        -- stop the jungle sounds channel for this screen
-        audio.stop(jungleSoundsChannel)
+        -- stop the whoosh sounds channel for this screen
+        audio.stop(whooshSoundsChannel)
     end
 
 end --function scene:hide( event )
